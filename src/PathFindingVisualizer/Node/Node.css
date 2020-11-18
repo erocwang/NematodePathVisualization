@@ -14,7 +14,7 @@
 }
 
 .node-seen {
-    background-color: rgba(0, 190, 218, 0.75);
+    background-color: green;
 }
 
 .node-visited {
