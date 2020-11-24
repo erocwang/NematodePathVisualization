@@ -1,6 +1,6 @@
-// (c) 2020 eric wang 
 import React, {Component} from 'react';
 import Node from './Node/Node';
+import Neuron from './Neuron/Neuron';
 import {nematode} from '../Algorithms/Nematode'; 
 
 import './PathFindingVisualizer.css';
@@ -15,12 +15,14 @@ export default class PathFindingVisualizer extends Component {
         super(props);
         this.state = {
             grid: [],
+            circuit: [], 
         }; 
     }
 
     componentDidMount() {
         const grid = getInitialGrid(); 
-        this.setState({grid});
+        const circuit = getInitialCircuit(); 
+        this.setState({grid,circuit});
     }
 
     visualizeNematode() {
@@ -34,19 +36,28 @@ export default class PathFindingVisualizer extends Component {
     animateNematode(visitedNodesInOrder) {
         for(let i=0; i<visitedNodesInOrder.length-1; i++) {
             const node = visitedNodesInOrder[i];
+            const prev = i===0 ? 1000 : visitedNodesInOrder[i-1].dist; 
             setTimeout(() => {
-                document.getElementById(`node-${node.row}-${node.col}`).className =
-                'node node-visited';
+                document.getElementById(`node-${node.row}-${node.col}`).className = 'node node-visited';
+                if(node.dist > prev) {
+                    document.getElementById(`neuron-AWC`).className = 'neuron green';
+                    document.getElementById(`neuron-AIB`).className = 'inter-neuron red';
+                    document.getElementById(`neuron-AIY`).className = 'inter-neuron off';
+                }
+                else {
+                    document.getElementById(`neuron-AWC`).className = 'neuron off';
+                    document.getElementById(`neuron-AIB`).className = 'inter-neuron off';
+                    document.getElementById(`neuron-AIY`).className = 'inter-neuron blue';
+                }
             }, 50 * (i+1) - 50); 
             setTimeout(() => {
-                document.getElementById(`node-${node.row}-${node.col}`).className =
-                'node node-seen';
+                document.getElementById(`node-${node.row}-${node.col}`).className = 'node node-seen';
             }, 50 * (i+1) - 25); 
         }
     }
 
     render() {
-        const {grid} = this.state; 
+        const {grid,circuit} = this.state; 
         return (
             <>
             <button onClick={() => this.visualizeNematode()}>
@@ -70,6 +81,21 @@ export default class PathFindingVisualizer extends Component {
                     </div> 
                 })}
             </div> 
+            <div className = "circuit"> 
+                {circuit.map((col,colIdx) => {
+                    return <div key={colIdx} className="container">
+                        {col.map((neuron,neuronIdx) => {
+                            const {tag} = neuron;
+                            return (
+                                <Neuron 
+                                key = {neuronIdx}
+                                tag = {tag}
+                                ></Neuron> 
+                            );
+                        })}
+                    </div>
+                })}
+            </div>
             </>
         );
     }
@@ -96,4 +122,22 @@ const getInitialGrid = () => {
     }
     return grid;
   };
+
+const createNeuron = (tag) => {
+    return {
+        tag, 
+    };
+};
+
+const getInitialCircuit = () => {
+    const circuit = []; 
+    const col_1 = []; 
+    col_1.push(createNeuron('AWC'));
+    const col_3 = []; 
+    col_3.push(createNeuron('AIB'));
+    col_3.push(createNeuron('AIY'));
+    circuit.push(col_1);
+    circuit.push(col_3); 
+    return circuit; 
+};
 

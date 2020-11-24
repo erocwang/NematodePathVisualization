@@ -1,4 +1,3 @@
-// (c) 2020 eric wang 
 import React , {Component} from 'react';
 import './Node.css';
 

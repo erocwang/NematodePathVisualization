@@ -1,0 +1,25 @@
+           <div className={`big-container`}>
+                <div className={`container`}> 
+                    <div className={`source`}>
+                        <div className={`inner`}> 
+                            AWC
+                        </div>
+                    </div> 
+                </div>
+                <div className={`container`}> 
+                    <div><font size ='+10'>&#8599;</font></div>
+                    <div><font size ='+10'>&#8600;</font></div>
+                </div>
+                <div className={`container`}> 
+                    <div className={`receptor`}>
+                        <div className={`inner`}> 
+                            AIB
+                        </div>
+                    </div> 
+                    <div className={`receptor`}>
+                        <div className={`inner`}> 
+                            AIY
+                        </div>
+                    </div> 
+                </div>  
+            </div>

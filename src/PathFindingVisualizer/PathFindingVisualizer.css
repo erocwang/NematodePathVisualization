@@ -1,4 +1,17 @@
 .grid {
     margin: 100px 0 0 0;
   }
+
+.circuit {
+    margin: 0px 0 0 0; 
+    display: inline-block; 
+  }
+
+.container {
+    margin: 0px 0 0 0; 
+    height: 100px; 
+    outline: 1px solid rgb(81, 163, 226);
+    display: table-cell; 
+    vertical-align: middle;
+}
   
