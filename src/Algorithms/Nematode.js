@@ -2,13 +2,16 @@ export function nematode(grid,startNode,endNode) {
     updateDist(grid,endNode); 
     const visitedNodesInOrder = [];
     var curNode = startNode;  
-    while((curNode!==endNode)) {    
+    var count = 1000; 
+    while((curNode!==endNode) && count) {   
+        count--; 
         const [neighbors,neighborDists] = getNeighbors(curNode,grid,endNode);
         const totalDist = neighborDists[neighborDists.length-1]; 
         const r = Math.random()*totalDist; 
         for(let i=0; i<neighborDists.length; i++) {
             if(r <= neighborDists[i]) {
                 curNode = neighbors[i];
+                console.log(neighborDists); 
                 visitedNodesInOrder.push(curNode); 
                 break; 
             }
@@ -17,45 +20,35 @@ export function nematode(grid,startNode,endNode) {
     return visitedNodesInOrder; 
 }
 
-// sort the nodes by distance, then grab the corresponding distances and put into list, reverse this distance list and use that mapping to determine randomization weightings 
 function getNeighbors(node,grid,endNode) {
     const neighbors = []; 
     const neighborDists = []; 
-    const {row,col} = node; 
+    const dir = [[1,0],[-1,0],[0,-1],[0,1]];
+    const expo = 10; 
+    for(let i = 0; i < 4; i++) {
+        const nextRow = node.row + dir[i][0]; 
+        const nextCol = node.col + dir[i][1]; 
+        if(nextRow >= 0 && nextRow <= grid.length-1 && nextCol >=0 && nextCol <= grid[0].length-1 && !grid[nextRow][nextCol].isWall) {
+            neighbors.push(grid[nextRow][nextCol]); 
+        }
+    } 
+    sortByDist(neighbors); 
     var neighborDist = 0;
-    const expo = 5; 
-    if(row>0) {
-        neighbors.push(grid[row-1][col]);
-        if(Math.abs(endNode.row-grid[row-1][col].row) + Math.abs(endNode.col-grid[row-1][col].col) > Math.abs(endNode.row-node.row) + Math.abs(endNode.col-node.col))  neighborDist+=Math.pow(grid[row-1][col].dist/2,expo);
-        else neighborDist+=Math.pow(grid[row-1][col].dist,expo); 
-        neighborDists.push(neighborDist); 
-    }
-    if(row<grid.length-1) {
-        neighbors.push(grid[row+1][col]);
-        if(Math.abs(endNode.row-grid[row+1][col].row) + Math.abs(endNode.col-grid[row+1][col].col) > Math.abs(endNode.row-node.row) + Math.abs(endNode.col-node.col))  neighborDist+=Math.pow(grid[row+1][col].dist/2,expo);
-        else neighborDist+=Math.pow(grid[row+1][col].dist,expo); 
-        neighborDists.push(neighborDist); 
-    }
-    if(col>0) {
-        neighbors.push(grid[row][col-1]);
-        if(Math.abs(endNode.row-grid[row][col-1].row) + Math.abs(endNode.col-grid[row][col-1].col) > Math.abs(endNode.row-node.row) + Math.abs(endNode.col-node.col))  neighborDist+=Math.pow(grid[row][col-1].dist/2,expo);
-        else neighborDist+=Math.pow(grid[row][col-1].dist,expo); 
-        neighborDists.push(neighborDist); 
-    }
-    if(col<grid[0].length-1) {
-        neighbors.push(grid[row][col+1]); 
-        if(Math.abs(endNode.row-grid[row][col+1].row) + Math.abs(endNode.col-grid[row][col+1].col) > Math.abs(endNode.row-node.row) + Math.abs(endNode.col-node.col))  neighborDist+=Math.pow(grid[row][col+1].dist/2,expo);
-        else neighborDist+=Math.pow(grid[row][col+1].dist,expo); 
-        neighborDists.push(neighborDist); 
+    for(let i = neighbors.length-1; i >= 0; i--) {
+        neighborDist += Math.pow(neighbors[i].dist,expo); 
+        neighborDists.push(neighborDist);
     }
     return [neighbors,neighborDists]; 
 }
 
+function sortByDist(neighbors) {
+    neighbors.sort((nodeA, nodeB) => nodeA.dist - nodeB.dist); 
+}
+
 function updateDist(grid,endNode) {
-    const maxDist = endNode.row+endNode.col; 
     for(const row of grid) {
         for(const node of row) {
-            node.dist = maxDist - (Math.abs(endNode.row-node.row) + Math.abs(endNode.col-node.col));
+            node.dist = Math.abs(endNode.row-node.row) + Math.abs(endNode.col-node.col);
         }
     }
 }

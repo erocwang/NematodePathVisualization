@@ -16,6 +16,7 @@ export default class PathFindingVisualizer extends Component {
         this.state = {
             grid: [],
             circuit: [], 
+            mouseIsPressed: false, 
         }; 
     }
 
@@ -23,6 +24,21 @@ export default class PathFindingVisualizer extends Component {
         const grid = getInitialGrid(); 
         const circuit = getInitialCircuit(); 
         this.setState({grid,circuit});
+    }
+
+    handleMouseDown(row, col) {
+        const newGrid = getNewGridWithWallToggled(this.state.grid, row, col);
+        this.setState({grid: newGrid, mouseIsPressed: true});
+    }
+    
+    handleMouseEnter(row, col) {
+        if (!this.state.mouseIsPressed) return;
+        const newGrid = getNewGridWithWallToggled(this.state.grid, row, col);
+        this.setState({grid: newGrid});
+    }
+    
+    handleMouseUp() {
+        this.setState({mouseIsPressed: false});
     }
 
     visualizeNematode() {
@@ -57,7 +73,7 @@ export default class PathFindingVisualizer extends Component {
     }
 
     render() {
-        const {grid,circuit} = this.state; 
+        const {grid,circuit,mouseIsPressed} = this.state; 
         return (
             <>
             <button onClick={() => this.visualizeNematode()}>
@@ -67,7 +83,7 @@ export default class PathFindingVisualizer extends Component {
                 {grid.map((row,rowIdx) => {
                     return <div key={rowIdx}>
                         {row.map((node,nodeIdx) => {
-                            const {row,col,isStart,isEnd} = node; 
+                            const {row,col,isStart,isEnd,isWall} = node; 
                             return (
                                 <Node
                                 key = {nodeIdx}
@@ -75,6 +91,13 @@ export default class PathFindingVisualizer extends Component {
                                 col = {col}
                                 isStart = {isStart}
                                 isEnd = {isEnd}
+                                isWall={isWall}
+                                mouseIsPressed={mouseIsPressed}
+                                onMouseDown={(row, col) => this.handleMouseDown(row, col)}
+                                onMouseEnter={(row, col) =>
+                                  this.handleMouseEnter(row, col)
+                                }
+                                onMouseUp={() => this.handleMouseUp()}
                                 ></Node>
                             );
                         })}
@@ -139,5 +162,16 @@ const getInitialCircuit = () => {
     circuit.push(col_1);
     circuit.push(col_3); 
     return circuit; 
+};
+
+const getNewGridWithWallToggled = (grid, row, col) => {
+    const newGrid = grid.slice();
+    const node = newGrid[row][col];
+    const newNode = {
+      ...node,
+      isWall: !node.isWall,
+    };
+    newGrid[row][col] = newNode;
+    return newGrid;
 };
 
