@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/PathVisualization/static/css/main.a7570f37.chunk.css",
-    "main.js": "/PathVisualization/static/js/main.1b3b3c75.chunk.js",
-    "main.js.map": "/PathVisualization/static/js/main.1b3b3c75.chunk.js.map",
-    "runtime-main.js": "/PathVisualization/static/js/runtime-main.7a450720.js",
-    "runtime-main.js.map": "/PathVisualization/static/js/runtime-main.7a450720.js.map",
-    "static/js/2.9846e885.chunk.js": "/PathVisualization/static/js/2.9846e885.chunk.js",
-    "static/js/2.9846e885.chunk.js.map": "/PathVisualization/static/js/2.9846e885.chunk.js.map",
-    "static/js/3.117c9f61.chunk.js": "/PathVisualization/static/js/3.117c9f61.chunk.js",
-    "static/js/3.117c9f61.chunk.js.map": "/PathVisualization/static/js/3.117c9f61.chunk.js.map",
-    "index.html": "/PathVisualization/index.html",
-    "static/css/main.a7570f37.chunk.css.map": "/PathVisualization/static/css/main.a7570f37.chunk.css.map",
-    "static/js/2.9846e885.chunk.js.LICENSE.txt": "/PathVisualization/static/js/2.9846e885.chunk.js.LICENSE.txt"
+    "main.css": "/NematodePathVisualization/static/css/main.943990f6.chunk.css",
+    "main.js": "/NematodePathVisualization/static/js/main.c626f5a0.chunk.js",
+    "main.js.map": "/NematodePathVisualization/static/js/main.c626f5a0.chunk.js.map",
+    "runtime-main.js": "/NematodePathVisualization/static/js/runtime-main.6f85d941.js",
+    "runtime-main.js.map": "/NematodePathVisualization/static/js/runtime-main.6f85d941.js.map",
+    "static/js/2.68040b1f.chunk.js": "/NematodePathVisualization/static/js/2.68040b1f.chunk.js",
+    "static/js/2.68040b1f.chunk.js.map": "/NematodePathVisualization/static/js/2.68040b1f.chunk.js.map",
+    "static/js/3.723914f9.chunk.js": "/NematodePathVisualization/static/js/3.723914f9.chunk.js",
+    "static/js/3.723914f9.chunk.js.map": "/NematodePathVisualization/static/js/3.723914f9.chunk.js.map",
+    "index.html": "/NematodePathVisualization/index.html",
+    "static/css/main.943990f6.chunk.css.map": "/NematodePathVisualization/static/css/main.943990f6.chunk.css.map",
+    "static/js/2.68040b1f.chunk.js.LICENSE.txt": "/NematodePathVisualization/static/js/2.68040b1f.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.7a450720.js",
-    "static/js/2.9846e885.chunk.js",
-    "static/css/main.a7570f37.chunk.css",
-    "static/js/main.1b3b3c75.chunk.js"
+    "static/js/runtime-main.6f85d941.js",
+    "static/js/2.68040b1f.chunk.js",
+    "static/css/main.943990f6.chunk.css",
+    "static/js/main.c626f5a0.chunk.js"
   ]
 }
