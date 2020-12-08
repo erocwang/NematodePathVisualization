@@ -5,10 +5,10 @@ import {nematode} from '../Algorithms/Nematode';
 
 import './PathFindingVisualizer.css';
 
-const START_ROW = 0; 
-const START_COL = 0; 
-const END_ROW = 19; 
-const END_COL = 49; 
+const START_ROW = 10; 
+const START_COL = 10; 
+const END_ROW = 10; 
+const END_COL = 40; 
 
 export default class PathFindingVisualizer extends Component {
     constructor(props) {
@@ -39,6 +39,19 @@ export default class PathFindingVisualizer extends Component {
     
     handleMouseUp() {
         this.setState({mouseIsPressed: false});
+    }
+
+    reset() {
+        for (let row = 0; row < 20; row++) {
+            for (let col = 0; col < 50; col++) {
+                if((row!==START_ROW || col!==START_COL) && (row!==END_ROW || col!==END_COL)) {
+                    document.getElementById(`node-${row}-${col}`).className = 'node';
+                }
+            }
+        }
+        document.getElementById(`neuron-AWC`).className = 'neuron';
+        document.getElementById(`neuron-AIB`).className = 'inter-neuron';
+        document.getElementById(`neuron-AIY`).className = 'inter-neuron';
     }
 
     visualizeNematode() {
@@ -76,9 +89,14 @@ export default class PathFindingVisualizer extends Component {
         const {grid,circuit,mouseIsPressed} = this.state; 
         return (
             <>
-            <button onClick={() => this.visualizeNematode()}>
-                Visualize Nematode
-            </button>
+            <div className = "navigation"> 
+                <button onClick={() => this.visualizeNematode()}>
+                    Visualize Nematode
+                </button>
+                <button onClick={() => this.reset()}>
+                    Reset 
+                </button>
+            </div> 
             <div className = "grid"> 
                 {grid.map((row,rowIdx) => {
                     return <div key={rowIdx}>
