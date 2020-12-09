@@ -39,10 +39,10 @@ function getNeighbors(node,grid,endNode) {
             //console.log(neighbors);
             neighborDist += Math.pow(grid[nextRow][nextCol].dist,expo); 
             if(grid[nextRow][nextCol].dist>node.dist) {
-                neighborDists.push(1); 
+                neighborDists.push((50-grid[nextRow][nextCol].dist)/2); 
             }
             else {
-                neighborDists.push(Math.max(2,(30 - grid[nextRow][nextCol].dist))); 
+                neighborDists.push((50-grid[nextRow][nextCol].dist)); 
             }
             weights += neighborDists[neighborDists.length-1]; 
         }

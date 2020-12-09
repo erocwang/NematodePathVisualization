@@ -54,6 +54,12 @@ export default class PathFindingVisualizer extends Component {
         document.getElementById(`neuron-AIY`).className = 'inter-neuron';
     }
 
+    floodVisualize() {
+        for(let i=0; i<10; i++) {
+            this.visualizeNematode(); 
+        }
+    }
+
     visualizeNematode() {
         const {grid} = this.state; 
         const startNode = grid[START_ROW][START_COL]; 
@@ -63,11 +69,11 @@ export default class PathFindingVisualizer extends Component {
     }
 
     animateNematode(visitedNodesInOrder) {
-        for(let i=0; i<visitedNodesInOrder.length-1; i++) {
+        for(let i=1; i<visitedNodesInOrder.length-1; i++) {
             const node = visitedNodesInOrder[i];
             const prev = i===0 ? 1000 : visitedNodesInOrder[i-1].dist; 
             setTimeout(() => {
-                document.getElementById(`node-${node.row}-${node.col}`).className = 'node node-visited';
+                if(node.row!==START_ROW || node.col!==END_COL) document.getElementById(`node-${node.row}-${node.col}`).className = 'node node-visited';
                 if(node.dist > prev) {
                     document.getElementById(`neuron-AWC`).className = 'neuron green';
                     document.getElementById(`neuron-AIB`).className = 'inter-neuron red';
@@ -89,13 +95,17 @@ export default class PathFindingVisualizer extends Component {
         const {grid,circuit,mouseIsPressed} = this.state; 
         return (
             <>
+            <div className = "back">
             <div className = "navigation"> 
-                <button onClick={() => this.visualizeNematode()}>
+                <button class = "button1" onClick={() => this.visualizeNematode()}>
                     Visualize Nematode
                 </button>
-                <button onClick={() => this.reset()}>
-                    Reset 
-                </button>
+                    <button class = "button1" onClick={() => this.floodVisualize()}>
+                        Flood!
+                    </button>
+                    <button class = "button1" onClick={() => this.reset()}>
+                        Reset 
+                    </button>
             </div> 
             <div className = "grid"> 
                 {grid.map((row,rowIdx) => {
@@ -136,6 +146,7 @@ export default class PathFindingVisualizer extends Component {
                         })}
                     </div>
                 })}
+            </div>
             </div>
             </>
         );

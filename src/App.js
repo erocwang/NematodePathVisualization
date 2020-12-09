@@ -9,9 +9,6 @@ function App() {
   }
   return (
     <div className="App">
-      <button onClick={reset}>
-        Reset
-      </button>
       <PathFindingVisualizer key = {vizKey}></PathFindingVisualizer>
     </div>
   );

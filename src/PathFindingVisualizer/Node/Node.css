@@ -1,8 +1,9 @@
 .node {
     width: 25px;
     height: 25px;
-    outline: 1px solid rgb(81, 163, 226);
+    outline: 1px solid #4ecca3;
     display: inline-block;
+    margin: 0 0 0 0;
   }
 
 .node-start {
@@ -14,7 +15,7 @@
 }
 
 .node-seen {
-    background-color: green;
+    background-color: grey;
 }
 
 .node-wall {

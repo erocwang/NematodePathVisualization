@@ -1,10 +1,44 @@
+.back {
+  background-color: #232931;
+  opacity:0.8;
+  position:fixed;
+  width:100%;
+  height:100%;
+  top:0px;
+  left:0px;
+  z-index:1000;
+}
 .navigation {
   display: block; 
-  background-color: lightblue; 
+  background-color: #4ecca3; 
 }
-
+.button1{
+  display:inline-block;
+  padding:0.35em 1.2em;
+  border:0.1em solid #000000;
+  margin:0.3em 0.3em 0.3em 0.3em;
+  border-radius:0.12em;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-family:'Roboto',sans-serif;
+  font-weight:300;
+  color:#000000;
+  background-color: #4ecca3;
+  text-align:center;
+  transition: all 0.2s;
+}
+.button1:hover{
+  color:#000000;
+  background-color:#FFFFFF;
+}
+@media all and (max-width:30em){
+  .button1{
+    display:block;
+    margin:0.4em auto;
+  }
+}
 .grid {
-    margin: 100px 0 0 0;
+    margin: 10px 0 0 0;
   }
 
 .circuit {
@@ -15,7 +49,7 @@
 .container {
     margin: 0px 0 0 0; 
     height: 100px; 
-    outline: 1px solid rgb(81, 163, 226);
+    /* outline: 1px solid rgb(81, 163, 226); */
     display: table-cell; 
     vertical-align: middle;
 }
