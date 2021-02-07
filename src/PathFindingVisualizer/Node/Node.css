@@ -3,7 +3,7 @@
     height: 25px;
     outline: 1px solid #4ecca3;
     display: inline-block;
-    margin: 0 0 0 0;
+    margin: 0 5px 0 0;
   }
 
 .node-start {
@@ -15,7 +15,7 @@
 }
 
 .node-seen {
-    background-color: grey;
+    background-color: yellow;
 }
 
 .node-wall {

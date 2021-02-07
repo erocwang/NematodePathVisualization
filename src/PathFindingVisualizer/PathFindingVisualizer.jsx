@@ -69,11 +69,13 @@ export default class PathFindingVisualizer extends Component {
     }
 
     animateNematode(visitedNodesInOrder) {
-        for(let i=1; i<visitedNodesInOrder.length-1; i++) {
+        //for(let i=visitedNodesInOrder.length-1; i>=0; i--) {
+        for(let i=0; i<visitedNodesInOrder.length-1; i++) {
             const node = visitedNodesInOrder[i];
+            console.log(i)
             const prev = i===0 ? 1000 : visitedNodesInOrder[i-1].dist; 
             setTimeout(() => {
-                if(node.row!==START_ROW || node.col!==END_COL) document.getElementById(`node-${node.row}-${node.col}`).className = 'node node-visited';
+                if(node.row!==START_ROW || node.col!==START_COL) document.getElementById(`node-${node.row}-${node.col}`).className = 'node node-visited';
                 if(node.dist > prev) {
                     document.getElementById(`neuron-AWC`).className = 'neuron green';
                     document.getElementById(`neuron-AIB`).className = 'inter-neuron red';

@@ -1,4 +1,3 @@
-
 //nematode algorithm for choosing path 
 export function nematode(grid,startNode,endNode) {
     updateDist(grid,endNode); 
@@ -34,9 +33,7 @@ function getNeighbors(node,grid,endNode) {
         const nextRow = node.row + dir[i][0]; 
         const nextCol = node.col + dir[i][1]; 
         if(nextRow >= 0 && nextRow <= grid.length-1 && nextCol >=0 && nextCol <= grid[0].length-1 && !grid[nextRow][nextCol].isWall) {
-            //console.log(grid[nextRow][nextCol])
             neighbors.push(grid[nextRow][nextCol]); 
-            //console.log(neighbors);
             neighborDist += Math.pow(grid[nextRow][nextCol].dist,expo); 
             if(grid[nextRow][nextCol].dist>node.dist) {
                 neighborDists.push((50-grid[nextRow][nextCol].dist)/2); 
@@ -46,7 +43,7 @@ function getNeighbors(node,grid,endNode) {
             }
             weights += neighborDists[neighborDists.length-1]; 
         }
-    } 
+    }
     var curneighborDists = 0; 
     for(let i=0; i<neighbors.length; i++) {
         curneighborDists += neighborDists[i]/weights*neighborDist; 
